@@ -4,7 +4,7 @@ import requests
 import folium
 from streamlit_folium import folium_static
 from datetime import datetime, date
-from pytz import country_names  # For country list
+from pytz import country_names
 
 # Configuration
 API_URL = "https://taxifare.lewagon.ai/predict"
@@ -119,7 +119,7 @@ def calculate_fare(distance_km, passenger_count, currency, trip_datetime, countr
     return round(fare_eur, 2)
 
 # Streamlit App Layout
-st.title("🚖 LeWagon_DS1992_TaxiFare_Calculator")
+st.title("🚖 LeWagon DS1992 TaxiFare Calculator 🚖")
 
 # Main columns layout
 col_left, col_right = st.columns([2, 1])
