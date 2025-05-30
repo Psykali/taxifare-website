@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import datetime
 
 # App title
 st.title("TaxiFareModel Front")
@@ -8,8 +9,20 @@ st.markdown('''
 Enter the details of your taxi ride below to get a fare prediction.
 ''')
 
+# Date selection with calendar
+date = st.date_input("Select date", value=datetime.date.today())
+
+# Create two columns for hour and minute selection
+col1, col2 = st.columns(2)
+with col1:
+    hour = st.selectbox("Hour", list(range(24)))
+with col2:
+    minute = st.selectbox("Minute", list(range(0, 60, 5)))  # Step of 5 minutes for convenience
+
+# Combine date and time into a proper format
+date_time = f"{date} {hour:02d}:{minute:02d}:00"
+
 # User input fields
-date_time = st.text_input("Enter date and time (YYYY-MM-DD HH:MM:SS)")
 pickup_longitude = st.number_input("Pickup longitude", value=0.0)
 pickup_latitude = st.number_input("Pickup latitude", value=0.0)
 dropoff_longitude = st.number_input("Dropoff longitude", value=0.0)
@@ -29,10 +42,10 @@ if st.button("Predict Fare"):
         "dropoff_latitude": dropoff_latitude,
         "passenger_count": passenger_count,
     }
-
+    
     # API call
     response = requests.get(url, params=params)
-
+    
     if response.status_code == 200:
         prediction = response.json()["fare"]
         st.success(f"Predicted fare: ${prediction:.2f}")
