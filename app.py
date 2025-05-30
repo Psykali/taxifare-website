@@ -119,7 +119,7 @@ def calculate_fare(distance_km, passenger_count, currency, trip_datetime, countr
     return round(fare_eur, 2)
 
 # Streamlit App Layout
-st.title("🚖 DS1992_TaxiFare_Calculator")
+st.title("🚖 LeWagon_DS1992_TaxiFare_Calculator")
 
 # Main columns layout
 col_left, col_right = st.columns([2, 1])
